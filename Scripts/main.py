@@ -27,23 +27,40 @@ class Clock_App:
 
     def widgets(self):
         """
-        Create and pack the label widget with the specified font, background, and foreground colors.
+        Create the widgets with the specified font, background, and foreground colors.
         """
         self.label_1 = Label(self.root, 
                              font = self.label_font,
                              background = self.label_background,
                              foreground = self.label_foreground,
                              )
+        
+        self.label_2 = Label(self.root, 
+                             font = self.label_font,
+                             background = self.label_background,
+                             foreground = self.label_foreground,
+                             )
+
+    def positions(self):
+        """
+        Pack the widgets accordingly.
+        """
         self.label_1.pack(anchor='center')
+        self.label_2.pack(anchor='center', padx= 12)
 
 
     def update_time(self):
         """
-        Update the label with the current time every second.
+        Update the labels with the current time every second.
         """
-        string = strftime('%H:%M:%S %p')
-        self.label_1.config(text=string)
+        # Label 1
+        display_time = strftime('%H:%M:%S')
+        self.label_1.config(text=display_time)
         self.label_1.after(1000, self.update_time)
+
+        # Label 2
+        display_day = strftime('%m/%d/%Y - %A')
+        self.label_2.config(text=display_day)
 
     def run(self):
         """
@@ -52,6 +69,7 @@ class Clock_App:
         """
         self.window()
         self.widgets()
+        self.positions()
         self.update_time()
         self.root.mainloop()
 
